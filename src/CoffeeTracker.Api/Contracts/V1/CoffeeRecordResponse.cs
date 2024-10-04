@@ -1,14 +1,16 @@
-﻿namespace CoffeeTracker.Api.Contracts.V1;
+﻿using CoffeeTracker.Api.Models;
+
+namespace CoffeeTracker.Api.Contracts.V1;
 
 public class CoffeeRecordResponse
 {
     #region Properties
 
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
-    public DateTime Date { get; set; }
+    public required DateTime Date { get; set; }
 
     #endregion
 }

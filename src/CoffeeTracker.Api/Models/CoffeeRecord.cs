@@ -9,13 +9,13 @@ public class CoffeeRecord
     #region Properties
 
     [Key]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     [Required]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [DataType(DataType.Date), Required]
-    public DateTime Date { get; set; }
+    public required DateTime Date { get; set; }
 
     #endregion
 }

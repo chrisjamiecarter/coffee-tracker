@@ -65,4 +65,14 @@ public static class ApiInstaller
 
         return app;
     }
+
+    public static WebApplication SetUpDatabase(this WebApplication app)
+    {
+        // Performs any database migrations and seeds the database.
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        services.SeedDatabase();
+
+        return app;
+    }
 }

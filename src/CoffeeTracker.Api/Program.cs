@@ -8,10 +8,12 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddApi();
+        builder.Services.AddApplication();
         builder.Services.AddDatabase(builder.Configuration);
 
         var app = builder.Build();
         app.AddMiddleware();
+        app.SetUpDatabase();
         app.Run();
     }
 }

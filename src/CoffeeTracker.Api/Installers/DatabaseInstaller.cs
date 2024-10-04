@@ -1,4 +1,5 @@
 ﻿using CoffeeTracker.Api.Data;
+using CoffeeTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeTracker.Api.Installers;
@@ -17,10 +18,9 @@ public static class DatabaseInstaller
             options.UseSqlServer(connectionString);
         });
 
-        //services.AddScoped<ICategoryRepository, CategoryRepository>();
-        //services.AddScoped<IFriendRepository, FriendRepository>();
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
-        //services.AddScoped<ISeederService, SeederService>();
+        services.AddScoped<ICoffeeTrackerRepository, CoffeeTrackerRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ISeederService, SeederService>();
 
         return services;
     }
@@ -30,8 +30,8 @@ public static class DatabaseInstaller
         var context = serviceProvider.GetRequiredService<CoffeeTrackerDataContext>();
         context.Database.Migrate();
 
-        //var seeder = serviceProvider.GetRequiredService<ISeederService>();
-        //seeder.SeedDatabase();
+        var seeder = serviceProvider.GetRequiredService<ISeederService>();
+        seeder.SeedDatabase();
 
         return serviceProvider;
     }
