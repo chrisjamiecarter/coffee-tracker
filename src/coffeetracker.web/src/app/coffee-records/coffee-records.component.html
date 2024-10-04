@@ -1,0 +1,16 @@
+<section class="results">
+    <table>
+        <thead>
+            <!-- <th>ID</th> -->
+            <th>Date</th>
+            <th>Name</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let coffeeRecord of coffeeRecords; index as i;">
+                <!-- <td>{{ coffeeRecord.id }}</td> -->
+                <td>{{ coffeeRecord.date | date:'yyyy-MM-dd' }}</td>
+                <td>{{ coffeeRecord.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+  </section>

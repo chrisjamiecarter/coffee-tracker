@@ -1,17 +1,16 @@
 .main {
+  background-color: var(--accent-color);
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+  z-index: -1;
 }
 
 .content {
   flex-grow: 1;
   margin: 0 auto;
-  padding: 0 1rem;
-  width: 100%;
-  z-index: -1;
-  background-color: var(--accent-color);
-  /* padding: var(--content-padding); */
+  padding: 1rem;
+  width: 90%;
 }
 
 header {
