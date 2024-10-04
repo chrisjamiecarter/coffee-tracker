@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using CoffeeTracker.Api.OpenApi;
 using CoffeeTracker.Api.Routes;
+using FluentValidation;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -31,6 +33,19 @@ public static class ApiInstaller
         services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
 
         services.AddSwaggerGen();
+        
+        services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.WriteIndented = true;
+            options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+        });
+        services.Configure<JsonOptions>(options =>
+        {
+            options.SerializerOptions.WriteIndented = true;
+            options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+        });
+
+        services.AddValidatorsFromAssemblyContaining<Program>();
 
         return services;
     }
