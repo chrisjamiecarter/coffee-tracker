@@ -50,3 +50,38 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  box-shadow: 0px 0px 20px var(--dark-shadow-color);
+}
+
+tr {
+  background-color: var(--secondary-color);
+}
+
+tr:hover {
+  background-color: var(--accent-color);
+}
+
+th {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+td {
+  text-align: left;
+}
+
+td,
+th {
+  border: 1px solid var(--black-color);
+  padding: 0.25rem 0.5rem;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+}

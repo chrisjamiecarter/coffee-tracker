@@ -9,7 +9,7 @@
 .content {
   flex-grow: 1;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2.5rem;
   width: 90%;
 }
 
@@ -59,9 +59,9 @@ footer {
 }
 
 .footer-icons {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .footer-icon {
@@ -73,7 +73,7 @@ footer {
 }
 
 .footer-text {
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    flex-grow: 1;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  flex-grow: 1;
 }
