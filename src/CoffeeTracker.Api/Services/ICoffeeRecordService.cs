@@ -1,7 +1,8 @@
 ﻿using CoffeeTracker.Api.Models;
 
 namespace CoffeeTracker.Api.Services;
-public interface ICoffeeTrackerService
+
+public interface ICoffeeRecordService
 {
     Task<bool> CreateAsync(CoffeeRecord coffeeRecord);
     Task<bool> DeleteAsync(CoffeeRecord coffeeRecord);

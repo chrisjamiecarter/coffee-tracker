@@ -50,13 +50,13 @@ public static class CoffeeTracker
         return app;
     }
 
-    private static async Task<IResult> GetAllCoffees([FromServices] ICoffeeTrackerService service)
+    private static async Task<IResult> GetAllCoffees([FromServices] ICoffeeRecordService service)
     {
         var entities = await service.ReturnAsync();
         return TypedResults.Ok(entities.Select(x => x.ToResponse()));
     }
 
-    private static async Task<IResult> GetCoffee([FromRoute] Guid id, [FromServices] ICoffeeTrackerService service)
+    private static async Task<IResult> GetCoffee([FromRoute] Guid id, [FromServices] ICoffeeRecordService service)
     {
         var entity = await service.ReturnAsync(id);
 
@@ -65,7 +65,7 @@ public static class CoffeeTracker
             : TypedResults.Ok(entity.ToResponse());
     }
 
-    private static async Task<IResult> CreateCoffee([FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeTrackerService service)
+    private static async Task<IResult> CreateCoffee([FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeRecordService service)
     {
         var model = request.ToModel();
 
@@ -76,7 +76,7 @@ public static class CoffeeTracker
         : TypedResults.BadRequest(new { error = "Unable to create coffee." });
     }
 
-    private static async Task<IResult> UpdateCoffee([FromRoute] Guid id, [FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeTrackerService service)
+    private static async Task<IResult> UpdateCoffee([FromRoute] Guid id, [FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeRecordService service)
     {
         var entity = await service.ReturnAsync(id);
         if (entity is null)
@@ -98,7 +98,7 @@ public static class CoffeeTracker
             : TypedResults.BadRequest(new { error = "Unable to update coffee." });
     }
 
-    private static async Task<IResult> DeleteCoffee([FromRoute] Guid id, [FromServices] ICoffeeTrackerService service)
+    private static async Task<IResult> DeleteCoffee([FromRoute] Guid id, [FromServices] ICoffeeRecordService service)
     {
         var entity = await service.ReturnAsync(id);
         if (entity is null)

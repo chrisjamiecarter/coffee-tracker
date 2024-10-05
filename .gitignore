@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Angular
 **/.angular
+src/CoffeeTracker.Api/appsettings.Development.json

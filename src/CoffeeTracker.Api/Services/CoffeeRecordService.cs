@@ -3,7 +3,7 @@ using CoffeeTracker.Api.Models;
 
 namespace CoffeeTracker.Api.Services;
 
-public class CoffeeTrackerService : ICoffeeTrackerService
+public class CoffeeRecordService : ICoffeeRecordService
 {
     #region Fields
 
@@ -12,7 +12,7 @@ public class CoffeeTrackerService : ICoffeeTrackerService
     #endregion
     #region Constructors
 
-    public CoffeeTrackerService(IUnitOfWork unitOfWork)
+    public CoffeeRecordService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
