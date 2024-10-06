@@ -1,16 +1,20 @@
 <app-add-coffee-record-form />
-<section class="results">
+<section class="table-container">
     <table>
         <thead>
-            <!-- <th>ID</th> -->
-            <th>Date</th>
-            <th>Name</th>
+            <tr>
+                <!-- <th>ID</th> -->
+                <th>Date</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let coffeeRecord of coffeeRecords; index as i;">
                 <!-- <td>{{ coffeeRecord.id }}</td> -->
                 <td>{{ coffeeRecord.date | date:'yyyy-MM-dd' }}</td>
                 <td>{{ coffeeRecord.name }}</td>
+                <td></td>
             </tr>
         </tbody>
     </table>

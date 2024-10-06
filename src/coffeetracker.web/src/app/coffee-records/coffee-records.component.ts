@@ -18,9 +18,9 @@ export class CoffeeRecordsComponent {
 
   constructor() {
     this.coffeeRecordService
-    .getAllCoffeeRecords()
-    .then((coffeeRecords: CoffeeRecord[]) => {
-      this.coffeeRecords = coffeeRecords;
-    })
+      .getAllCoffeeRecords()
+      .then((coffeeRecords: CoffeeRecord[]) => {
+        this.coffeeRecords = coffeeRecords;
+      })
   }
 }
