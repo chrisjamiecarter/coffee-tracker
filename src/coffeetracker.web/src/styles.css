@@ -13,10 +13,11 @@
   --primary-color: #6f4e37ff;
   --secondary-color: #F5e6ccff;
   --accent-color: #d2b48cff;
-  --light-shadow-color: #d0d0d0ff;
-  --dark-shadow-color: #0d0d0dff;
+  --shadow-color: #0000001a;
   --black-color: #0f0f0fff;
   --white-color: #f0f0f0ff;
+  --lower-box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+  --upper-box-shadow: 0 -4px 6px 1px var(--shadow-color), 0 -2px 4px 2px var(--shadow-color);
 }
 
 html {
@@ -101,4 +102,9 @@ th {
 .btn-primary {
   background-color: var(--primary-color);
   color: var(--secondary-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }

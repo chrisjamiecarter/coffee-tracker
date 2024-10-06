@@ -1,21 +1,42 @@
 <app-add-coffee-record-form />
-<section class="table-container">
+
+<section class="coffee-records-container">
+  <div class="search-container">
+    <form
+      [formGroup]="filterCoffeeRecordsForm"
+      class="search-form"
+      (keydown.enter)="$event.preventDefault()"
+      (submit)="onFilter()"
+    >
+      <label class="form-label" for="dateFrom">Date From</label>
+      <input id="dateFrom" class="form-date" type="date" formControlName="dateFrom" />
+      <label class="form-label" for="dateTo">Date To</label>
+      <input id="dateTo" class="form-date" type="date" formControlName="dateTo" />
+      <div class="form-buttons">
+          <button class="btn btn-secondary" type="button" (click)="onReset()">Reset</button>
+          <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
     <table>
-        <thead>
-            <tr>
-                <!-- <th>ID</th> -->
-                <th>Date</th>
-                <th>Name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let coffeeRecord of coffeeRecords; index as i;">
-                <!-- <td>{{ coffeeRecord.id }}</td> -->
-                <td>{{ coffeeRecord.date | date:'yyyy-MM-dd' }}</td>
-                <td>{{ coffeeRecord.name }}</td>
-                <td></td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Date</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coffeeRecord of filteredCoffeeRecords; index as i">
+          <!-- <td>{{ coffeeRecord.id }}</td> -->
+          <td>{{ coffeeRecord.date | date : "yyyy-MM-dd" }}</td>
+          <td>{{ coffeeRecord.name }}</td>
+          <td></td>
+        </tr>
+      </tbody>
     </table>
-  </section>
+  </div>
+</section>

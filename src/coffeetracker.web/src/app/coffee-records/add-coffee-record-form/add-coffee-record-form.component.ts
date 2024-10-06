@@ -18,7 +18,7 @@ export class AddCoffeeRecordFormComponent {
 
   constructor() { }
 
-  submitForm() {
+  onSubmit() {
     const request: CreateCoffeeRecord = { name: this.addCoffeeRecordForm.value.name!, date: this.addCoffeeRecordForm.value.date!};
     console.log("Submit Form", request);
     this.coffeeRecordService.addCoffeeRecord(request);
