@@ -44,7 +44,7 @@ a {
   text-decoration: none;
 }
 
-body {
+body, input[type="date"] {
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
