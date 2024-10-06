@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoffeeRecord } from './coffee-record.interface';
+import { CreateCoffeeRecord } from './create-coffee-record.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,21 @@ export class CoffeeRecordService {
 
   constructor() { }
 
+  async addCoffeeRecord(request: CreateCoffeeRecord): Promise<CoffeeRecord[]> {
+    const response = await fetch(this.url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request)
+    });
+
+    console.log("response", response)
+    return (await response.json()) ?? [];
+  }
+
   async getAllCoffeeRecords(): Promise<CoffeeRecord[]> {
-    const data = await fetch(this.url);
-    return (await data.json()) ?? [];
+    const response = await fetch(this.url);
+    return (await response.json()) ?? [];
   }
 }
