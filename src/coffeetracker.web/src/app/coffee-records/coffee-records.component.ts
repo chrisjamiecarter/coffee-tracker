@@ -4,12 +4,13 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CoffeeRecord } from '../shared/coffee-record.interface';
 import { CoffeeRecordService } from '../shared/coffee-record.service';
 import { AddCoffeeRecordFormComponent } from './add-coffee-record-form/add-coffee-record-form.component';
+import { DeleteCoffeeRecordModalComponent } from './delete-coffee-record-modal/delete-coffee-record-modal.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coffee-records',
   standalone: true,
-  imports: [AddCoffeeRecordFormComponent, CommonModule, ReactiveFormsModule],
+  imports: [AddCoffeeRecordFormComponent, CommonModule, DeleteCoffeeRecordModalComponent, ReactiveFormsModule],
   templateUrl: './coffee-records.component.html',
   styleUrl: './coffee-records.component.css',
 })
@@ -22,6 +23,10 @@ export class CoffeeRecordsComponent implements OnInit {
     dateTo: new FormControl(''),
   });
 
+  selectedCoffeeRecord: CoffeeRecord | null = null;
+  showDeleteModal = false;
+  showeditModal = false;
+
   constructor(private coffeeRecordService: CoffeeRecordService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
@@ -33,8 +38,28 @@ export class CoffeeRecordsComponent implements OnInit {
     this.coffeeRecordService.getCoffeeRecords();
   }
 
-  onDelete(id: string) {
-    console.log("OnDelete", id);
+  onDelete(coffeeRecord: CoffeeRecord) {
+    this.selectedCoffeeRecord = coffeeRecord;
+    this.showDeleteModal = true;
+  }
+
+  onConfirmDelete(id: string) {
+    console.log("OnConfirmDelete", id);
+
+    this.coffeeRecordService.deleteCoffeeRecord(id).subscribe((result) => {
+      if (result) {
+        this.showSuccessToastr('Coffee deleted successfully!');
+      } else {
+        this.showErrorToastr('Unable to delete Coffee!');
+      }
+    });
+
+    this.closeDeleteModal();
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.selectedCoffeeRecord = null;
   }
 
   onFilter() {
@@ -72,7 +97,6 @@ export class CoffeeRecordsComponent implements OnInit {
     this.filteredCoffeeRecords = this.coffeeRecords;
     this.showSuccessToastr('Coffee records filter reset!');
   }
-
   
   showErrorToastr(message: string) {
     this.toastr.error(message, 'Error');

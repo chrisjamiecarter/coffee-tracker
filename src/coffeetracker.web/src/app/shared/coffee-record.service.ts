@@ -32,6 +32,18 @@ export class CoffeeRecordService {
     );
   }
 
+  deleteCoffeeRecord(id: string): Observable<boolean> {
+    return this.http.delete<CoffeeRecord>(`${this.url}/${id}`).pipe(
+      map((record) => {
+        this.getCoffeeRecords();
+        return true;
+      }),
+      catchError((error) => {
+        console.error('ERROR - Deleting Coffee Record: ', error);
+        return of(false);
+      })
+    );
+  }
   getCoffeeRecords(): void {
     this.http.get<CoffeeRecord[]>(this.url).subscribe(
       (records) => {
