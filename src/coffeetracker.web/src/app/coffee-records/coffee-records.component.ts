@@ -33,6 +33,10 @@ export class CoffeeRecordsComponent implements OnInit {
     this.coffeeRecordService.getCoffeeRecords();
   }
 
+  onDelete(id: string) {
+    console.log("OnDelete", id);
+  }
+
   onFilter() {
     const filterDateFrom = this.filterCoffeeRecordsForm.value.dateFrom
       ? new Date(this.filterCoffeeRecordsForm.value.dateFrom)
@@ -55,7 +59,7 @@ export class CoffeeRecordsComponent implements OnInit {
 
       return true;
     });
-    
+
     this.showSuccessToastr('Coffee records filter applied!');
   }
 
