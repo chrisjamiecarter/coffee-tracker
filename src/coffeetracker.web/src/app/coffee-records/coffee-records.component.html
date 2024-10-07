@@ -49,7 +49,11 @@
           <td>{{ coffeeRecord.name }}</td>
           <td>
             <div class="table-buttons">
-              <button class="btn-icon" tabindex="-1">
+              <button 
+                class="btn-icon" 
+                tabindex="-1"
+                (click)="onEdit(coffeeRecord)" 
+              >
                 <svg
                   class="icon"
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,3 +98,11 @@
   (closeModal)="closeDeleteModal()"
 >
 </app-delete-coffee-record-modal>
+
+<app-edit-coffee-record-modal
+  *ngIf="showEditModal"
+  [coffeeRecord]="selectedCoffeeRecord"
+  (confirmEdit)="onConfirmEdit($event)"
+  (closeModal)="closeEditModal()"
+>
+</app-edit-coffee-record-modal>

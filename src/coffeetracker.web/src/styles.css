@@ -203,6 +203,17 @@ form.submitted input.ng-invalid {
   color: var(--primary-color);
 }
 
+.modal-date {
+  color: var(--black-color);
+  background-color: var(--white-color);
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 0.375rem;
+  display: block;
+  width: 100%;
+}
+
 .modal-text {
   color: var(--black-color);
   background-color: var(--white-color);

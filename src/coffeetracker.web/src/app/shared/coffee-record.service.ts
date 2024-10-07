@@ -44,6 +44,20 @@ export class CoffeeRecordService {
       })
     );
   }
+  
+  editCoffeeRecord(request: CoffeeRecord): Observable<boolean> {
+    return this.http.put<CoffeeRecord>(`${this.url}/${request.id}`, request, this.httpOptions).pipe(
+      map((record) => {
+        this.getCoffeeRecords();
+        return true;
+      }),
+      catchError((error) => {
+        console.error('ERROR - Updating Coffee Record: ', error);
+        return of(false);
+      })
+    );
+  }
+
   getCoffeeRecords(): void {
     this.http.get<CoffeeRecord[]>(this.url).subscribe(
       (records) => {
