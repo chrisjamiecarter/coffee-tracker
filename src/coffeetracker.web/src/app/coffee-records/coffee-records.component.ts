@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CoffeeRecord } from '../shared/coffee-record.interface';
 import { CoffeeRecordService } from '../shared/coffee-record.service';
 import { AddCoffeeRecordFormComponent } from './add-coffee-record-form/add-coffee-record-form.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coffee-records',
@@ -21,7 +22,7 @@ export class CoffeeRecordsComponent implements OnInit {
     dateTo: new FormControl(''),
   });
 
-  constructor(private coffeeRecordService: CoffeeRecordService) {}
+  constructor(private coffeeRecordService: CoffeeRecordService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.coffeeRecordService.CoffeeRecords.subscribe((records) => {
@@ -41,8 +42,6 @@ export class CoffeeRecordsComponent implements OnInit {
       ? new Date(this.filterCoffeeRecordsForm.value.dateTo)
       : null;
 
-    console.log('Filter Records', filterDateFrom, filterDateTo);
-
     this.filteredCoffeeRecords = this.coffeeRecords.filter((coffeeRecord) => {
       const recordDate = new Date(coffeeRecord.date);
 
@@ -56,6 +55,8 @@ export class CoffeeRecordsComponent implements OnInit {
 
       return true;
     });
+    
+    this.showSuccessToastr('Coffee records filter applied!');
   }
 
   onReset() {
@@ -65,5 +66,19 @@ export class CoffeeRecordsComponent implements OnInit {
     });
 
     this.filteredCoffeeRecords = this.coffeeRecords;
+    this.showSuccessToastr('Coffee records filter reset!');
+  }
+
+  
+  showErrorToastr(message: string) {
+    this.toastr.error(message, 'Error');
+  }
+
+  showSuccessToastr(message: string) {
+    this.toastr.success(message, 'Success');
+  }
+  
+  showWarningToastr(message: string) {
+    this.toastr.warning(message, 'Warning');
   }
 }
