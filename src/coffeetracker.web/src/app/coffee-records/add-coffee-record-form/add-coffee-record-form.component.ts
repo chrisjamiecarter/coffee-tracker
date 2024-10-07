@@ -13,7 +13,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './add-coffee-record-form.component.css',
 })
 export class AddCoffeeRecordFormComponent {
-  addCoffeeRecordForm = this.getAddCoffeeRecordForm();
+  addCoffeeRecordForm = this.resetAddCoffeeRecordForm();
+  formSubmitted: boolean = false;
 
   constructor(
     private coffeeRecordService: CoffeeRecordService,
@@ -21,28 +22,27 @@ export class AddCoffeeRecordFormComponent {
   ) {}
 
   onSubmit() {
-    const request: CreateCoffeeRecord = {
-      name: this.addCoffeeRecordForm.value.name ?? '',
-      date: this.addCoffeeRecordForm.value.date ?? '',
-    };
+    this.formSubmitted = true;
+    if (this.addCoffeeRecordForm.valid) {
+      const request: CreateCoffeeRecord = {
+        name: this.addCoffeeRecordForm.value.name ?? '',
+        date: this.addCoffeeRecordForm.value.date ?? '',
+      };
 
-    console.log('Submit Form', request);
-
-    this.coffeeRecordService.addCoffeeRecord(request).subscribe(
-      result => {
+      this.coffeeRecordService.addCoffeeRecord(request).subscribe((result) => {
         if (result) {
           this.showSuccessToastr('Coffee recorded successfully!');
-        }
-        else {
+        } else {
           this.showErrorToastr('Unable to record Coffee!');
         }
-      }
-    );
+      });
 
-    this.addCoffeeRecordForm = this.getAddCoffeeRecordForm();
+      this.addCoffeeRecordForm = this.resetAddCoffeeRecordForm();
+    }
   }
 
-  getAddCoffeeRecordForm() {
+  resetAddCoffeeRecordForm() {
+    this.formSubmitted = false;
     const today = new Date().toISOString().split('T')[0];
     return new FormGroup({
       name: new FormControl(''),
