@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { CoffeeRecord } from './coffee-record.interface';
 import { CreateCoffeeRecord } from './create-coffee-record.interface';
 
@@ -18,14 +19,16 @@ export class CoffeeRecordService {
 
   constructor(private http: HttpClient) {}
 
-  addCoffeeRecord(request: CreateCoffeeRecord): void {
-    this.http.post<CoffeeRecord>(this.url, request, this.httpOptions).subscribe(
-      (record) => {
+  addCoffeeRecord(request: CreateCoffeeRecord): Observable<boolean> {
+    return this.http.post<CoffeeRecord>(this.url, request, this.httpOptions).pipe(
+      map((record) => {
         this.getCoffeeRecords();
-      },
-      (error) => {
+        return true;
+      }),
+      catchError((error) => {
         console.error('ERROR - Adding Coffee Record: ', error);
-      }
+        return of(false);
+      })
     );
   }
 
