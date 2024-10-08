@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges  } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CoffeeRecord } from '../../shared/coffee-record.interface';
 import { ToastrService } from 'ngx-toastr';
@@ -9,13 +16,13 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edit-coffee-record-modal.component.html',
-  styleUrl: './edit-coffee-record-modal.component.css'
+  styleUrl: './edit-coffee-record-modal.component.css',
 })
 export class EditCoffeeRecordModalComponent implements OnChanges {
   @Input() coffeeRecord: CoffeeRecord | null = null;
   @Output() confirmEdit = new EventEmitter<CoffeeRecord>();
   @Output() closeModal = new EventEmitter<void>();
-  
+
   editCoffeeRecordForm = this.resetEditCoffeeRecordForm();
   formSubmitted: boolean = false;
 
@@ -23,7 +30,6 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['coffeeRecord'] && this.coffeeRecord) {
-      // Reset the form when a new coffee record is passed in
       this.editCoffeeRecordForm = this.resetEditCoffeeRecordForm();
     }
   }
@@ -37,8 +43,7 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
         date: new Date(this.editCoffeeRecordForm.value.date ?? ''),
       };
       this.confirmEdit.emit(request);
-    }
-    else {
+    } else {
       this.showWarningToastr('Form contains invalid fields!');
     }
   }
@@ -48,7 +53,7 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
     this.coffeeRecord = null;
     this.closeModal.emit();
   }
-  
+
   resetEditCoffeeRecordForm() {
     this.formSubmitted = false;
 
@@ -65,7 +70,7 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
       });
     }
   }
-  
+
   showErrorToastr(message: string) {
     this.toastr.error(message, 'Error');
   }
@@ -73,7 +78,7 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
   showSuccessToastr(message: string) {
     this.toastr.success(message, 'Success');
   }
-  
+
   showWarningToastr(message: string) {
     this.toastr.warning(message, 'Warning');
   }

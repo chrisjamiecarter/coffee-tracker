@@ -1,4 +1,4 @@
 export interface CreateCoffeeRecord {
-    name: string;
-    date: string;
+  name: string;
+  date: string;
 }

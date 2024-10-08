@@ -7,7 +7,7 @@ import { CoffeeRecord } from '../../shared/coffee-record.interface';
   standalone: true,
   imports: [DatePipe],
   templateUrl: './delete-coffee-record-modal.component.html',
-  styleUrl: './delete-coffee-record-modal.component.css'
+  styleUrl: './delete-coffee-record-modal.component.css',
 })
 export class DeleteCoffeeRecordModalComponent {
   @Input() coffeeRecord: CoffeeRecord | null = null;

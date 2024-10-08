@@ -11,7 +11,13 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-coffee-records',
   standalone: true,
-  imports: [AddCoffeeRecordFormComponent, CommonModule, DeleteCoffeeRecordModalComponent, EditCoffeeRecordModalComponent, ReactiveFormsModule],
+  imports: [
+    AddCoffeeRecordFormComponent,
+    CommonModule,
+    DeleteCoffeeRecordModalComponent,
+    EditCoffeeRecordModalComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './coffee-records.component.html',
   styleUrl: './coffee-records.component.css',
 })
@@ -28,7 +34,10 @@ export class CoffeeRecordsComponent implements OnInit {
   showDeleteModal = false;
   showEditModal = false;
 
-  constructor(private coffeeRecordService: CoffeeRecordService, private toastr: ToastrService) {}
+  constructor(
+    private coffeeRecordService: CoffeeRecordService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.coffeeRecordService.CoffeeRecords.subscribe((records) => {
@@ -40,7 +49,7 @@ export class CoffeeRecordsComponent implements OnInit {
   }
 
   onConfirmDelete(id: string) {
-    console.log("OnConfirmDelete", id);
+    console.log('OnConfirmDelete', id);
     this.coffeeRecordService.deleteCoffeeRecord(id).subscribe((result) => {
       if (result) {
         this.showSuccessToastr('Coffee deleted successfully!');
@@ -53,18 +62,20 @@ export class CoffeeRecordsComponent implements OnInit {
   }
 
   onConfirmEdit(coffeeRecord: CoffeeRecord) {
-    console.log("OnConfirmEdit", coffeeRecord);
-    this.coffeeRecordService.editCoffeeRecord(coffeeRecord).subscribe((result) => {
-      if (result) {
-        this.showSuccessToastr('Coffee updated successfully!');
-      } else {
-        this.showErrorToastr('Unable to update Coffee!');
-      }
-    });
+    console.log('OnConfirmEdit', coffeeRecord);
+    this.coffeeRecordService
+      .editCoffeeRecord(coffeeRecord)
+      .subscribe((result) => {
+        if (result) {
+          this.showSuccessToastr('Coffee updated successfully!');
+        } else {
+          this.showErrorToastr('Unable to update Coffee!');
+        }
+      });
 
     this.closeEditModal();
   }
-  
+
   onDelete(coffeeRecord: CoffeeRecord) {
     this.selectedCoffeeRecord = coffeeRecord;
     this.showDeleteModal = true;
@@ -120,7 +131,7 @@ export class CoffeeRecordsComponent implements OnInit {
     this.filteredCoffeeRecords = this.coffeeRecords;
     this.showSuccessToastr('Coffee records filter reset!');
   }
-  
+
   showErrorToastr(message: string) {
     this.toastr.error(message, 'Error');
   }
@@ -128,7 +139,7 @@ export class CoffeeRecordsComponent implements OnInit {
   showSuccessToastr(message: string) {
     this.toastr.success(message, 'Success');
   }
-  
+
   showWarningToastr(message: string) {
     this.toastr.warning(message, 'Warning');
   }

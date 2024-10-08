@@ -38,8 +38,7 @@ export class AddCoffeeRecordFormComponent {
       });
 
       this.addCoffeeRecordForm = this.resetAddCoffeeRecordForm();
-    }
-    else {
+    } else {
       this.showWarningToastr('Form contains invalid fields!');
     }
   }
@@ -60,7 +59,7 @@ export class AddCoffeeRecordFormComponent {
   showSuccessToastr(message: string) {
     this.toastr.success(message, 'Success');
   }
-  
+
   showWarningToastr(message: string) {
     this.toastr.warning(message, 'Warning');
   }
