@@ -4,6 +4,10 @@ using CoffeeTracker.Api.Models;
 
 namespace CoffeeTracker.Api.Services;
 
+/// <summary>
+/// Provides methods to seed the database with initial data.
+/// This service adds a defined set of default Categories and a set of fake Friends using Bogus.
+/// </summary>
 public class SeederService : ISeederService
 {
     #region Fields

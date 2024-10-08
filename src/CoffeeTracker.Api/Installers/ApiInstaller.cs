@@ -8,6 +8,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CoffeeTracker.Api.Installers;
 
+/// <summary>
+/// Registers dependencies and adds any required middleware for the API layer.
+/// </summary>
 public static class ApiInstaller
 {
     public static IServiceCollection AddApi(this IServiceCollection services)
@@ -28,17 +31,19 @@ public static class ApiInstaller
             options.GroupNameFormat = "'v'V";
             options.SubstituteApiVersionInUrl = true;
         });
+
         services.AddEndpointsApiExplorer();
+
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
         services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
 
-        services.AddSwaggerGen();
-        
         services.ConfigureHttpJsonOptions(options =>
         {
             options.SerializerOptions.WriteIndented = true;
             options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
         });
+
         services.Configure<JsonOptions>(options =>
         {
             options.SerializerOptions.WriteIndented = true;
@@ -52,7 +57,7 @@ public static class ApiInstaller
 
     public static WebApplication AddMiddleware(this WebApplication app)
     {
-        // Required before UseSwaggerUI to ensure correct definitions are available to swagger.
+        // NOTE: Required before UseSwaggerUI to ensure correct definitions are available to swagger.
         app.MapCoffeeTrackerEndpoints();
 
         if (app.Environment.IsDevelopment())

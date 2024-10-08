@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeTracker.Api.Data;
 
+/// <summary>
+/// Provides repository operations for managing the <see cref="CoffeeRecord"/> entity.
+/// This class implements the <see cref="ICoffeeTrackerRepository"/> interface, offering 
+/// methods to perform CRUD operations against the database using Entity Framework Core.
+/// </summary>
 public class CoffeeTrackerRepository : ICoffeeTrackerRepository
 {
     #region Fields

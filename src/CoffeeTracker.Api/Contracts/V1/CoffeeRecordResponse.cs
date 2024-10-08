@@ -1,7 +1,9 @@
-﻿using CoffeeTracker.Api.Models;
+﻿namespace CoffeeTracker.Api.Contracts.V1;
 
-namespace CoffeeTracker.Api.Contracts.V1;
-
+/// <summary>
+/// Represents only the necessary information for returning a CoffeeRecord as API response back to 
+/// the client.
+/// </summary>
 public class CoffeeRecordResponse
 {
     #region Properties

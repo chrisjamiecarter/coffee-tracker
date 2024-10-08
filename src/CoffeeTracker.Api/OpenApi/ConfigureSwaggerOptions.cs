@@ -1,12 +1,17 @@
-﻿using Asp.Versioning.ApiExplorer;
+﻿using System.Text;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Text;
 
 namespace CoffeeTracker.Api.OpenApi;
 
+/// <summary>
+/// The ConfigureSwaggerOptions class configures the Swagger generation options for the API. 
+/// It creates Swagger documents for each discovered API version, allowing for detailed 
+/// API versioning and documentation using OpenAPI and Swashbuckle.
+/// </summary>
 public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 {
     private readonly IApiVersionDescriptionProvider provider;

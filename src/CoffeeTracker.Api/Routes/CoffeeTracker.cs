@@ -7,8 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeTracker.Api.Routes;
 
+/// <summary>
+/// Defines the API endpoints for managing coffee records. 
+/// It provides methods to map routes for creating, retrieving, updating, and deleting coffee records, 
+/// and supports versioned APIs using Asp.Versioning.
+/// </summary>
 public static class CoffeeTracker
 {
+    #region Methods: Public
+
     public static WebApplication MapCoffeeTrackerEndpoints(this WebApplication app)
     {
         var apiVersionSet = app.NewApiVersionSet()
@@ -50,6 +57,35 @@ public static class CoffeeTracker
         return app;
     }
 
+    #endregion
+    #region Methods: Private
+
+    private static async Task<IResult> CreateCoffee([FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeRecordService service)
+    {
+        var model = request.ToModel();
+
+        var created = await service.CreateAsync(model);
+
+        return created
+        ? TypedResults.CreatedAtRoute(model.ToResponse(), nameof(GetCoffee), new { id = model.Id })
+        : TypedResults.BadRequest(new { error = "Unable to create coffee." });
+    }
+
+    private static async Task<IResult> DeleteCoffee([FromRoute] Guid id, [FromServices] ICoffeeRecordService service)
+    {
+        var entity = await service.ReturnAsync(id);
+        if (entity is null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        var deleted = await service.DeleteAsync(entity);
+
+        return deleted
+            ? TypedResults.NoContent()
+            : TypedResults.BadRequest(new { error = "Unable to delete coffee." });
+    }
+
     private static async Task<IResult> GetAllCoffees([FromServices] ICoffeeRecordService service)
     {
         var entities = await service.ReturnAsync();
@@ -63,17 +99,6 @@ public static class CoffeeTracker
         return entity is null
             ? TypedResults.NotFound()
             : TypedResults.Ok(entity.ToResponse());
-    }
-
-    private static async Task<IResult> CreateCoffee([FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeRecordService service)
-    {
-        var model = request.ToModel();
-
-        var created = await service.CreateAsync(model);
-
-        return created
-        ? TypedResults.CreatedAtRoute(model.ToResponse(), nameof(GetCoffee), new { id = model.Id })
-        : TypedResults.BadRequest(new { error = "Unable to create coffee." });
     }
 
     private static async Task<IResult> UpdateCoffee([FromRoute] Guid id, [FromBody] CoffeeRecordRequest request, [FromServices] ICoffeeRecordService service)
@@ -98,18 +123,5 @@ public static class CoffeeTracker
             : TypedResults.BadRequest(new { error = "Unable to update coffee." });
     }
 
-    private static async Task<IResult> DeleteCoffee([FromRoute] Guid id, [FromServices] ICoffeeRecordService service)
-    {
-        var entity = await service.ReturnAsync(id);
-        if (entity is null)
-        {
-            return TypedResults.NotFound();
-        }
-
-        var deleted = await service.DeleteAsync(entity);
-
-        return deleted
-            ? TypedResults.NoContent()
-            : TypedResults.BadRequest(new { error = "Unable to delete coffee." });
-    }
+    #endregion
 }

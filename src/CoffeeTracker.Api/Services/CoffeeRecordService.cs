@@ -3,6 +3,11 @@ using CoffeeTracker.Api.Models;
 
 namespace CoffeeTracker.Api.Services;
 
+/// <summary>
+/// Service class responsible for managing operations related to the <see cref="CoffeeRecord"/> entity.
+/// Provides methods for creating, updating, deleting, and retrieving data by interacting with the
+/// underlying data repositories through the Unit of Work pattern.
+/// </summary>
 public class CoffeeRecordService : ICoffeeRecordService
 {
     #region Fields

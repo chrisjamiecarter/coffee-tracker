@@ -1,8 +1,15 @@
-﻿using CoffeeTracker.Api.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeTracker.Api.Data;
 
+/// <summary>
+/// The UnitOfWork class provides a central point for managing database transactions and saving
+/// changes across repositories.
+/// </summary>
+/// <remarks>
+/// This class follows the Unit of Work design pattern, ensuring that all repository operations 
+/// are treated as a single transaction, maintaining data consistency.
+/// </remarks>
 public class UnitOfWork : IUnitOfWork
 {
     #region Fields

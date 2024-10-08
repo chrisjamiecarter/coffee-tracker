@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Text.Json;
 
 namespace CoffeeTracker.Api.OpenApi;
 
+/// <summary>
+/// The SwaggerDefaultValues class implements the <see cref="IOperationFilter"/> interface to customize
+/// the generation of OpenAPI documentation for the API. This filter is responsible for applying default values 
+/// and ensuring consistency between the API description and the generated Swagger document.
+/// </summary>
 public class SwaggerDefaultValues : IOperationFilter
 {
     /// <inheritdoc />

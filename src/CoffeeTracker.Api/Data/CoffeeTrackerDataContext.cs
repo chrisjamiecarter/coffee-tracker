@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeTracker.Api.Data;
 
+/// <summary>
+/// Represents the Entity Framework Core database context for the CoffeeTracker data store.
+/// </summary>
 public class CoffeeTrackerDataContext : DbContext
 {
     #region Constructors

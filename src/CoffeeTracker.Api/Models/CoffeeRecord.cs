@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeeTracker.Api.Models;
 
+/// <summary>
+/// Represents a CoffeeRecord model. This acts as both the domain and infrastructure version.
+/// </summary>
 [Table("CoffeeRecord")]
 public class CoffeeRecord
 {
