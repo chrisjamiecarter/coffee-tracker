@@ -17,7 +17,7 @@ It allows users to visualise their coffee intake. They can add, update and delet
 	- The edit and delete pages are implemented as modals.
 - **Form Validation**:
 	- Form validation will ensure correct values before form submission.
-- **Toatr**:
+- **Toastr**:
 	- Displays success, error and warning toasts when performing actions.
 - **External API**:
 	- The coffee records service interfaces with an API.
@@ -141,9 +141,7 @@ Once the Web application is running:
 
 ## How It Works
 
-- **Page Display**: This project was bootstrapped via `create-react-app` and uses React to render the components of the web application.
 - **Page Display**: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
-- **State Management**: Redux is used to manage the state within the web application.
 - **API Integration**: Fetch is used to call the External API.
 - **Data Storage**: A new SQL Server database is created and the required schema is set up at run-time, or an existing database is used if previously created.
 - **Data Access**: Interaction with the database is via Entity Framework Core.
@@ -165,4 +163,4 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 For any questions or feedback, please open an issue.
 
 ---
-***Happy Friends Managing!***
+***Happy Coffee Tracking!***
