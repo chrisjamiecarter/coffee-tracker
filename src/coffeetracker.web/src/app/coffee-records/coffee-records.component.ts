@@ -42,14 +42,13 @@ export class CoffeeRecordsComponent implements OnInit {
   ngOnInit(): void {
     this.coffeeRecordService.CoffeeRecords.subscribe((records) => {
       this.coffeeRecords = records;
-      this.filteredCoffeeRecords = records;
+      this.onFilter(false);
     });
 
     this.coffeeRecordService.getCoffeeRecords();
   }
 
   onConfirmDelete(id: string) {
-    console.log('OnConfirmDelete', id);
     this.coffeeRecordService.deleteCoffeeRecord(id).subscribe((result) => {
       if (result) {
         this.showSuccessToastr('Coffee deleted successfully!');
@@ -62,7 +61,6 @@ export class CoffeeRecordsComponent implements OnInit {
   }
 
   onConfirmEdit(coffeeRecord: CoffeeRecord) {
-    console.log('OnConfirmEdit', coffeeRecord);
     this.coffeeRecordService
       .editCoffeeRecord(coffeeRecord)
       .subscribe((result) => {
@@ -96,7 +94,7 @@ export class CoffeeRecordsComponent implements OnInit {
     this.selectedCoffeeRecord = null;
   }
 
-  onFilter() {
+  onFilter(showToast: boolean) {
     const filterDateFrom = this.filterCoffeeRecordsForm.value.dateFrom
       ? new Date(this.filterCoffeeRecordsForm.value.dateFrom)
       : null;
@@ -106,7 +104,7 @@ export class CoffeeRecordsComponent implements OnInit {
       : null;
 
     this.filteredCoffeeRecords = this.coffeeRecords.filter((coffeeRecord) => {
-      const recordDate = new Date(coffeeRecord.date);
+      const recordDate = new Date(coffeeRecord.date.toString().split('T')[0]);
 
       if (filterDateFrom && recordDate < filterDateFrom) {
         return false;
@@ -119,7 +117,9 @@ export class CoffeeRecordsComponent implements OnInit {
       return true;
     });
 
-    this.showSuccessToastr('Coffee records filter applied!');
+    if (showToast) {
+      this.showSuccessToastr('Coffee records filter applied!');
+    }
   }
 
   onReset() {

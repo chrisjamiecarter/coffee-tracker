@@ -58,7 +58,7 @@ export class EditCoffeeRecordModalComponent implements OnChanges {
     this.formSubmitted = false;
 
     if (this.coffeeRecord) {
-      const date = new Date(this.coffeeRecord.date).toISOString().split('T')[0];
+      const date = this.coffeeRecord.date.toString().split('T')[0];
       return new FormGroup({
         name: new FormControl(this.coffeeRecord.name),
         date: new FormControl(date),

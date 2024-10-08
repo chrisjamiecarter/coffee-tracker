@@ -7,7 +7,7 @@
       [formGroup]="filterCoffeeRecordsForm"
       class="search-form"
       (keydown.enter)="$event.preventDefault()"
-      (submit)="onFilter()"
+      (submit)="onFilter(true)"
     >
       <label class="form-label" for="dateFrom">Date From</label>
       <input
@@ -44,7 +44,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let coffeeRecord of filteredCoffeeRecords; index as i">
-          <!-- <td>{{ coffeeRecord.id }}</td> -->
           <td>{{ coffeeRecord.date | date : "yyyy-MM-dd" }}</td>
           <td>{{ coffeeRecord.name }}</td>
           <td>
